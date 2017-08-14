@@ -1,4 +1,4 @@
-# Redundant HaProxy with CARP Based Redundancy
+# Redundant HaProxy with CARP Based Dynamic Fail Over
 
 Audience: Technical personnel with basic understanding of IPv4 concepts and routing and understanding of TCP load balancing. Basic UNIX shell knowledge.
 

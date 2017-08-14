@@ -1,4 +1,5 @@
 Redundant HaProxy with CARP Based Redundancy
+
 Audience: Technical personnel with basic understanding of IPv4 concepts and routing and understanding of TCP load balancing. Basic UNIX shell knowledge.
 
 Motivation: In a past project I needed a solution that could provide load balancing for MySQL (Percona in my case) and basic HTTP included. but at the same time redundancy and a method for dynamic fail over. Sure I can have a vendor like F5 or A10 provide the functionality out of the box. But where is the challenge on that? Why not create it possible? What is my budget does not allow for the expense on a vendor based appliance?

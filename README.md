@@ -1,8 +1,15 @@
 # Redundant HaProxy with CARP Based Dynamic Fail Over
 
-Audience: Technical personnel with basic understanding of IPv4 concepts and routing and understanding of TCP load balancing. Basic UNIX shell knowledge.
+Audience: Network and/ or System Administrators
 
-Motivation: In a past project I needed a solution that could provide load balancing for MySQL (Percona in my case) and basic HTTP included. but at the same time redundancy and a method for dynamic fail over. Sure I can have a vendor like F5 or A10 provide the functionality out of the box. But where is the challenge on that? Why not create it possible? What is my budget does not allow for the expense on a vendor based appliance?
+Pre-requisites: Basic understanding of IPv4 concepts and routing and understanding of TCP load balancing. Basic UNIX shell knowledge. Familiarity with HAProxy or similar load balancing configurations.
+
+Motivation: 
+A solution that could provide:
+1. Load balancing for MySQL (Percona in my case) and basic HTTP and HTTPS if needed
+2. Redundancy and a method for dynamic fail over. 
+
+Sure I can have a vendor like F5 or A10 provide the functionality out of the box. But where is the challenge on that? Why not create it possible? What is my budget does not allow for the expense on a vendor based appliance?
 Open Source is there fo r a reason... Why not use it?
 
 Solution: The solution I settled for was based on FreeBSD UNIX using CARP a method for failover an redundancy similar to Cisco HSRP or the open standard VRRP. For Load Balancing the best solution I've seen is HA Proxy, a fantastic TCP based load balancer.
@@ -13,10 +20,8 @@ Steps (See Files):
 1. First enable IP routing and CARP on the HAProxy Systems
 /etc/sysctl.conf - Both Systems #
 
-2. Configure the IP's and CARP Groups. If you're familiar with VRRP or HSRP this part will 
-look very familiar as the basics are covered: 
-A redundancy group with an ID as a number and a Virtual IP attached to that group.
-/etc/rc.conf
+2. Configure the IP's and CARP Groups. If you're familiar with VRRP or HSRP this part will look very familiar as the basics are covered with a redundancy group with an ID as a number and a Virtual IP attached to that group.
+/etc/rc.conf (2 files included for Primary and Secondary)
 
 3(a). Configure the HAProxy Daemon
 /usr/local/etc/haproxy.conf - Primary #

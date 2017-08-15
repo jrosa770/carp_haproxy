@@ -45,3 +45,5 @@ The editor can be changed from ee to vi or any other editor. (Line 13 in haconf:
 A Bash script to sync the configuration from the primary HAProxy to the Secondary (Requires the etckeeper and diffcolor packages)
 
 The scripts are intended to be used first haconf to edit the file then hasync to sync the new configuration to the standby (secondary) HAProxy.
+
+The scripts could be combined via Bash or translated to Python in order to provide a transition from configuration edit to sync.

@@ -43,3 +43,5 @@ Makes a Backup of the current haproxy.conf file. Then the current haproxy file i
 The editor can be changed from ee to vi or any other editor. (Line 13 in haconf: from ee $Original to vi $Original)
 # HaSync
 A Bash script to sync the configuration from the primary HAProxy to the Secondary (Requires the etckeeper and diffcolor packages)
+
+The scripts are intended to be used first haconf to edit the file then hasync to sync the new configuration to the standby (secondary) HAProxy.

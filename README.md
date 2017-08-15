@@ -35,3 +35,11 @@ Steps (See Files):
 5. Configure the Service for Port 9200 TCP
  -- Xinetd Service for TCP 9200 -- 
 /etc/xinetd.d/mysqlcheck
+
+# Management Scripts
+# HaConf
+Makes a Backup of the current haproxy.conf file. Then the current haproxy file is opened in ee (FreeBSD Easy Editor) for editing.
+
+The editor can be changed from ee to vi or any other editor. (Line 13 in haconf: from ee $Original to vi $Original)
+# HaSync
+A Bash script to sync the configuration from the primary HAProxy to the Secondary (Requires the etckeeper and diffcolor packages)

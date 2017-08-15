@@ -29,8 +29,8 @@ Steps (See Files):
 3 (b). Configure the HAProxy Daemon
 /usr/local/etc/haproxy.conf - Secondary #
 
-4. This setup requires a separate probe for Health checks.
-/var/lib/mysql-check/mysqlchk.mysql.bash
+4. This setup requires a separate probe for Health checks at the destination server(s). In this case MySQL.
+/var/lib/mysql-check/mysqlchk.mysq.bash
 
 5. Configure the Service for Port 9200 TCP
  -- Xinetd Service for TCP 9200 -- 

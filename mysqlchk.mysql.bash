@@ -17,7 +17,7 @@
 
 MYSQL_HOST="THIS_HOST_IP"
 MYSQL_PORT="3306"
-MYSQL_USERNAME="mysqladmin"
+MYSQL_USERNAME="mysqladmin_user"
 MYSQL_PASSWORD="mysqladmin_passwd"
 MYSQL_OPTS="-N -q -A"
 TMP_FILE="/dev/shm/mysqlchk.$$.out"

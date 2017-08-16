@@ -14,8 +14,11 @@
 #
 # The purpose of this script is make haproxy capable of monitoring mysql properly
 #
-
-MYSQL_HOST="THIS_HOST_IP"
+# Host IP Discovery #
+ip=($(host `hostname` | awk '/address/ {print $NF}'))
+host=($(hostname))
+#
+MYSQL_HOST="$ip"
 MYSQL_PORT="3306"
 MYSQL_USERNAME="mysqladmin_user"
 MYSQL_PASSWORD="mysqladmin_passwd"

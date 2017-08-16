@@ -48,6 +48,7 @@ ifconfig_hn1_alias5="vhid 5 pass passwd4 10.2.2.5/24 up"				# CARP Group 5 with 
 ifconfig_hn1_alias55="vhid 55 pass passwd44 10.2.2.55/24 up"			# CARP Group 55 with password and Group Virtual IP
 #
 gateway_enable="YES" # Set to YES if this host will be a gateway, in order for the system to forward packets between interfaces
+# Static Routes
 static_routes="mgmtnet usernet mysqlnet httpnet"
 route_mgmtnet="-net 10.1.0.0/23 10.1.1.254"
 route_usernet="-net 10.0.0.0/16 10.2.2.254"
@@ -66,6 +67,7 @@ ifconfig_hn1_alias5="vhid 5 advskew 100 pass passwd4 10.2.2.5/24 up"	 # CARP Gro
 ifconfig_hn1_alias55="vhid 55 advskew 100 pass passwd44 10.2.2.55/24 up" # CARP Group 44 with password and Group Virtual IP
 #
 gateway_enable="YES" # Set to YES if this host will be a gateway, in order for the system to forward packets between interfaces
+# Static Routes
 static_routes="mgmtnet usernet mysqlnet httpnet"
 route_mgmtnet="-net 10.1.0.0/23 10.1.1.254"
 route_usernet="-net 10.0.0.0/16 10.2.2.254"

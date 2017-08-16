@@ -52,7 +52,7 @@ static_routes="mgmtnet usernet mysqlnet httpnet"
 route_mgmtnet="-net 10.1.0.0/23 10.1.1.254"
 route_usernet="-net 10.0.0.0/16 10.2.2.254"
 route_mysqlnet="-net 10.4.4.0/23 10.2.2.254"
-route_httpnet="-net 10.4.4.0/23 10.3.3.254"
+route_httpnet="-net 10.6.6.0/23 10.3.3.254"
 #
 
 # -- Secondary Host -- #

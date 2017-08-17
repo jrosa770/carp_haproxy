@@ -19,7 +19,29 @@
 CURRENTCFG=/usr/local/etc/haproxy.conf
 NEWCFG=/tmp/haproxy.cfg.tmp
 CONFIGDIR=/usr/local/etc/haproxy.d
-
+CFGBACKUPDIR=/usr/local/etc/haproxy.d/backup
+#
+# Pre Commit Functions
+# Backup Current haproxy.conf
+DateTimeStamp=$(date '+%m-%d-%y_%H:%M:%S')
+#
+function makeBackup() {
+    Original=$1
+    FileName=$(basename $Original)
+    Directory=$(dirname $Original)
+    cp $Original ${Directory}/backup/${DateTimeStamp}_${FileName}
+}
+# Backup of Section Files
+function makeBackuphasync() {
+DATE=$(date '+%m-%d-%y_%H:%M:%S')
+cd $CONFIGDIR
+tar -zcvf HASYNC-$DateTimeStamp.tgz *.cfg
+mv $CONFIGDIR/*.tgz $CFGBACKUPDIR
+}
+#
+makeBackup /usr/local/etc/haproxy.conf
+makeBackuphasync
+#
 echo "Compiling *.cfg files from $CONFIGDIR"
 ls -la $CONFIGDIR/*.cfg
 cat $CONFIGDIR/*.cfg > $NEWCFG

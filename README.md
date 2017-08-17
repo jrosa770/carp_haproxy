@@ -36,14 +36,23 @@ Steps (See Files):
  -- Xinetd Service for TCP 9200 -- 
 /etc/xinetd.d/mysqlcheck
 
-# Management Scripts
-# HaConf
+## Management Scripts
+> HaSync
+A Bash script to edit the haproxy.conf file in sections. The script will gather the sections into a single haproxy.conf file to then sync the configuration from the primary HAProxy to the Secondary (Requires the etckeeper and diffcolor packages). A second hasync file named hasync_from_primary is installed on the standby for proper synchronization.
+
+The script assumes following directory structure:
+...
+#/usr/local/etc/haproxy/conf.d/
+#├── 00-global.cfg
+#├── 15-stats.cfg
+#├── 16-pcl.cfg
+#├── 17-others.cfg
+#Every site has it's own file, so you can disable site by changing
+#it's file extension, or appending .disabled, like I do.
+...
+
+> HaConf
 Makes a Backup of the current haproxy.conf file. Then the current haproxy file is opened in ee (FreeBSD Easy Editor) for editing.
 
 The editor can be changed from ee to vi or any other editor. (Line 13 in haconf: from ee $Original to vi $Original)
-# HaSync
-A Bash script to sync the configuration from the primary HAProxy to the Secondary (Requires the etckeeper and diffcolor packages)
-
-The scripts are intended to be used first haconf to edit the file then hasync to sync the new configuration to the standby (secondary) HAProxy.
-
-The scripts could be combined via Bash or translated to Python in order to provide a transition from configuration edit to sync.
+The script is intended as a standalone editing routing but does not provide for synchronization with the standby. If synchronization is needed the better alternative is hasync. Haconf is intended mainly for initial configurations, test or standalone HAProxy setups.

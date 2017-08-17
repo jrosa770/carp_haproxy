@@ -7,7 +7,7 @@
 #Also, script will commit changes to etckeeper, if you don't use etckeeper you
 #should start using it.
 #Script assumes following directory structure:
-#/etc/haproxy/conf.d/
+#/usr/local/etc/haproxy/conf.d/
 #├── 00-global.cfg
 #├── 15-stats.cfg
 #├── 16-pcl.cfg

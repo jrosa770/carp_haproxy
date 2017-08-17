@@ -42,6 +42,7 @@ Steps (See Files):
 A Bash script to edit the haproxy.conf file in sections. The script will gather the sections into a single haproxy.conf file to then sync the configuration from the primary HAProxy to the Secondary (Requires the etckeeper and diffcolor packages). A second hasync file named hasync_from_primary is installed on the standby for proper synchronization.
 
 The script assumes following directory structure:
+
 ...bash
 #/usr/local/etc/haproxy/conf.d/
 

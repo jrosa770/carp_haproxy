@@ -22,7 +22,9 @@ Steps (See Files):
 1. First enable IP routing and CARP on the HAProxy Systems
 /etc/sysctl.conf - Both Systems #
 
-2. Configure the IP's and CARP Groups. If you're familiar with VRRP or HSRP this part will look very familiar as the basics are covered with a redundancy group with an ID as a number and a Virtual IP attached to that group.
+2. Configure the IP's and CARP Groups. If you're familiar with VRRP or HSRP this part will look 
+very familiar as the basics are covered with a redundancy group with an ID as a number and a 
+Virtual IP attached to that group.
 /etc/rc.conf (2 files included for Primary and Secondary)
 2a.
 File rc.conf-primary to /etc/rc.conf on primary
@@ -35,13 +37,17 @@ File rc.conf-secondary to /etc/rc.conf on secondary
 3 (b). Configure the HAProxy Daemon
 /usr/local/etc/haproxy.conf - Secondary #
 
-4. This setup requires a separate probe for Health checks at the destination server(s). In this case MySQL.
+4. This setup requires a separate probe for Health checks at the destination server(s). 
+In this case MySQL.
 /var/lib/mysql-check/mysqlchk.mysq.bash
 
 5. Configure the Service for Port 9200 TCP
  -- Xinetd Service for TCP 9200 -- 
 /etc/xinetd.d/mysqlcheck
+
 ```
+
+'The probe file can be adapted to monitor other services using either standard or non-standard TCP ports'
 
 ## Management Scripts
 > HaSync

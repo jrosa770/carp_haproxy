@@ -60,9 +60,9 @@ In this case MySQL.
 ## Management Scripts
 > HaSync
 
-A Bash script to edit the haproxy.conf file in sections. The script will gather the sections into a single haproxy.conf file to then sync the configuration from the primary HAProxy to the Secondary (Requires the etckeeper and diffcolor packages). A second hasync file named hasync_from_primary is installed on the standby for proper synchronization.
+HaSync is Bash script that builds the haproxy.conf files from sections. The intention is rather than editin the main haproxy.con file itself, the administrator can add or edit then stage the different sections., depending on need or personal preference. This is specially useful on larger implementations, issue isolation and ease of use. The script will then gather the sections into a single haproxy.conf file to then sync the configuration from the primary HAProxy to the Secondary (Requires the etckeeper and diffcolor packages). A second hasync file named hasync_from_primary is installed on the standby for proper synchronization.
 
-The script assumes following directory structure:
+For our example the script assumes following directory structure:
 
 ```sh
 #/usr/local/etc/haproxy/conf.d/
@@ -71,7 +71,7 @@ The script assumes following directory structure:
 #├── stats.cfg
 #├── pcl.cfg (Percona/ MySQL)
 #├── http.cfg 
-#├── httpd.cfg
+#├── https.cfg
 #├── others.cfg (Any Non Standard TCP Port)
 
 ```

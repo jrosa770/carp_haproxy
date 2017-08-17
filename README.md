@@ -43,16 +43,16 @@ A Bash script to edit the haproxy.conf file in sections. The script will gather 
 
 The script assumes following directory structure:
 
-```
+```sh
 #/usr/local/etc/haproxy/conf.d/
 
-#├── 00-global.cfg
+#├── global.cfg
 
-#├── 15-stats.cfg
+#├── stats.cfg
 
-#├── 16-pcl.cfg
+#├── pcl.cfg
 
-#├── 17-others.cfg
+#├── others.cfg
 
 ```
 

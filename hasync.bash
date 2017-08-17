@@ -10,21 +10,44 @@
 #/usr/local/etc/haproxy/conf.d/
 #├── global.cfg
 #├── stats.cfg
-#├── pcl.cfg
-#├── others.cfg
+#├── pcl.cfg (Percona/ MySQL)
+#├── http.cfg 
+#├── httpd.cfg
+#├── others.cfg (Any Non Standard TCP Port)
 #Every site has it's own file, so you can disable site by changing it's file extension, or appending .disabled. 
 #You can add ad many files as needed to create as many sections you require in your haproxy.conf file.
-
 # Configuration and vVariables #
 CURRENTCFG=/usr/local/etc/haproxy.conf
 NEWCFG=/tmp/haproxy.cfg.tmp
 CONFIGDIR=/usr/local/etc/haproxy.d
+CFGBACKUPDIR=/usr/local/etc/haproxy.d/backup
 # Admin User Credentials (Root or Sudo User)
 ADMIN_USR=haproxy_admin_usr
 ADMIN_PASSWD=haproxy_admin_passwd
 # Standby Haproxy IP or Hostname
 STANDBY_HAPROXY=standby_haproxy
-
+#
+# Pre Commit Functions
+# Backup Current haproxy.conf
+DateTimeStamp=$(date '+%m-%d-%y_%H:%M:%S')
+#
+function makeBackup() {
+    Original=$1
+    FileName=$(basename $Original)
+    Directory=$(dirname $Original)
+    cp $Original ${Directory}/backup/${DateTimeStamp}_${FileName}
+}
+# Backup of Section Files
+function makeBackuphasync() {
+DATE=$(date '+%m-%d-%y_%H:%M:%S')
+cd $CONFIGDIR
+tar -zcvf HASYNC-$DateTimeStamp.tgz *.cfg
+mv $CONFIGDIR/*.tgz $CFGBACKUPDIR
+}
+#
+makeBackup /usr/local/etc/haproxy.conf
+makeBackuphasync
+#
 echo "Compiling *.cfg files from $CONFIGDIR"
 ls -la $CONFIGDIR/*.cfg
 cat $CONFIGDIR/*.cfg > $NEWCFG
@@ -48,7 +71,7 @@ if [ $? -eq 0 ]; then
                 echo "Reloading haproxy..."
                 service haproxy reload
                 echo "Updating Backup Load Balancer"
-                sshpass -p '$ADMIN_PASSWD' rsync --progress -avz /usr/local/etc/haproxy.d/pcl.cfg /usr/local/etc/haproxy.d/others.cfg $ADMIN_USR@$STANDBY_HAPROXY:/usr/local/etc/haproxy.d
+                sshpass -p '$ADMIN_PASSWD' rsync --progress -avz /usr/local/etc/haproxy.d/*.cfg $ADMIN_USR@$STANDBY_HAPROXY:/usr/local/etc/haproxy.d
                 sshpass -p '$ADMIN_PASSWD' ssh  -o StrictHostKeyChecking=no $ADMIN_USR@$STANDBY_HAPROXY '/usr/local/bin/hasync_from_primary && service haproxy reload'
                 echo "Finished Update"
         fi

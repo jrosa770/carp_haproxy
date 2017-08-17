@@ -17,11 +17,17 @@ Solution: The solution I settled for was based on FreeBSD UNIX using CARP a meth
 Method: The following example is based on that solution. The basic setup requires two FreeBSD boxes or as VM(s). If VM(s) the recommendation is for two guests in two different hosts systems. An of course a network or set of available network and last bu not least the end systems that will ultimately handle the user's request for services.
 
 Steps (See Files):
+
+```
 1. First enable IP routing and CARP on the HAProxy Systems
 /etc/sysctl.conf - Both Systems #
 
 2. Configure the IP's and CARP Groups. If you're familiar with VRRP or HSRP this part will look very familiar as the basics are covered with a redundancy group with an ID as a number and a Virtual IP attached to that group.
 /etc/rc.conf (2 files included for Primary and Secondary)
+2a.
+File rc.conf-primary to /etc/rc.conf on primary
+2b.
+File rc.conf-secondary to /etc/rc.conf on secondary
 
 3(a). Configure the HAProxy Daemon
 /usr/local/etc/haproxy.conf - Primary #
@@ -35,6 +41,7 @@ Steps (See Files):
 5. Configure the Service for Port 9200 TCP
  -- Xinetd Service for TCP 9200 -- 
 /etc/xinetd.d/mysqlcheck
+```
 
 ## Management Scripts
 > HaSync

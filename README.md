@@ -61,14 +61,14 @@ The script assumes following directory structure:
 
 #├── global.cfg
 #├── stats.cfg
-#├── pcl.cfg
-#├── http.cfg
+#├── pcl.cfg (Percona/ MySQL)
+#├── http.cfg 
 #├── httpd.cfg
-#├── others.cfg
+#├── others.cfg (Any Non Standard TCP Port)
 
 ```
 
-Every site has it's own file, so you can disable site by changing it's file extension, or appending .disabled. You can add ad many files as needed to create as many sections you require in your haproxy.conf file.
+Every site has it's own file, so you can disable site by changing it's file extension, or appending .disabled. You can add ad many files as needed to create as many sections you require in your haproxy.conf file. Changes or additions can be done via console, via scp from an external source, scripting combinations or orchestration like Ansible.
 
 > HaConf
 

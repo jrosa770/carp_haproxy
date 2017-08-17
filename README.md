@@ -47,11 +47,10 @@ The script assumes following directory structure:
 #/usr/local/etc/haproxy/conf.d/
 
 #├── global.cfg
-
 #├── stats.cfg
-
 #├── pcl.cfg
-
+#├── http.cfg
+#├── httpd.cfg
 #├── others.cfg
 
 ```

@@ -43,8 +43,7 @@ A Bash script to edit the haproxy.conf file in sections. The script will gather 
 
 The script assumes following directory structure:
 
-...
-
+```
 #/usr/local/etc/haproxy/conf.d/
 
 #├── 00-global.cfg
@@ -56,8 +55,7 @@ The script assumes following directory structure:
 #├── 17-others.cfg
 
 Every site has it's own file, so you can disable site by changing it's file extension, or appending .disabled. You can add ad many files as needed to create as many sections you require in your haproxy.conf file.
-
-...
+```
 
 > HaConf
 

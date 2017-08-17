@@ -43,7 +43,7 @@ A Bash script to edit the haproxy.conf file in sections. The script will gather 
 
 The script assumes following directory structure:
 
-...bash
+...
 
 #/usr/local/etc/haproxy/conf.d/
 

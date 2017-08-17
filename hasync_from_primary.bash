@@ -10,8 +10,10 @@
 #/usr/local/etc/haproxy/conf.d/
 #├── global.cfg
 #├── stats.cfg
-#├── pcl.cfg
-#├── others.cfg
+#├── pcl.cfg (Percona/ MySQL)
+#├── http.cfg 
+#├── httpd.cfg
+#├── others.cfg (Any Non Standard TCP Port)
 #Every site has it's own file, so you can disable site by changing it's file extension, or appending .disabled. 
 #You can add ad many files as needed to create as many sections you require in your haproxy.conf file.
 
@@ -33,7 +35,6 @@ function makeBackup() {
 }
 # Backup of Section Files
 function makeBackuphasync() {
-DATE=$(date '+%m-%d-%y_%H:%M:%S')
 cd $CONFIGDIR
 tar -zcvf HASYNC-$DateTimeStamp.tgz *.cfg
 mv $CONFIGDIR/*.tgz $CFGBACKUPDIR

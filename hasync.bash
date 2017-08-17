@@ -39,7 +39,6 @@ function makeBackup() {
 }
 # Backup of Section Files
 function makeBackuphasync() {
-DATE=$(date '+%m-%d-%y_%H:%M:%S')
 cd $CONFIGDIR
 tar -zcvf HASYNC-$DateTimeStamp.tgz *.cfg
 mv $CONFIGDIR/*.tgz $CFGBACKUPDIR

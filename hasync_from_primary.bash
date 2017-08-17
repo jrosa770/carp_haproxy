@@ -8,12 +8,12 @@
 #should start using it.
 #Script assumes following directory structure:
 #/usr/local/etc/haproxy/conf.d/
-#├── 00-global.cfg
-#├── 15-stats.cfg
-#├── 16-pcl.cfg
-#├── 17-others.cfg
-#Every site has it's own file, so you can disable site by changing
-#it's file extension, or appending .disabled, like I do.
+#├── global.cfg
+#├── stats.cfg
+#├── pcl.cfg
+#├── others.cfg
+#Every site has it's own file, so you can disable site by changing it's file extension, or appending .disabled. 
+#You can add ad many files as needed to create as many sections you require in your haproxy.conf file.
 
 
 CURRENTCFG=/usr/local/etc/haproxy.conf

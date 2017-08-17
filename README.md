@@ -14,7 +14,7 @@ A solution that could provide:
 3. Configuration Management and Synchronization between primary and secondary load balancers
 
 Sure I can have a vendor like F5 or A10 provide the functionality out of the box. But where is the challenge on that? Why not create it possible? What is my budget does not allow for the expense on a vendor based appliance?
-Open Source is there fo r a reason... Why not use it?
+Open Source is there for a reason... Why not use it?
 
 > Solution
 
@@ -24,7 +24,7 @@ The solution I settled for was based on FreeBSD UNIX using CARP a method for fai
 
 The following example is based on that solution. The basic setup requires two FreeBSD boxes or as VM(s). If VM(s) the recommendation is for two guests in two different hosts systems. An of course a network or set of available network and last bu not least the end systems that will ultimately handle the user's request for services.
 
-Steps (See Files):
+> Steps (See Files):
 
 ```
 1. First enable IP routing and CARP on the HAProxy Systems

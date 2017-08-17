@@ -47,7 +47,7 @@ In this case MySQL.
 
 ```
 
-'The probe file can be adapted to monitor other services using either standard or non-standard TCP ports'
+`The probe file can be adapted to monitor other services using either standard or non-standard TCP ports`
 
 ## Management Scripts
 > HaSync

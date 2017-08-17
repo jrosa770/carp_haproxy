@@ -54,6 +54,7 @@ The script assumes following directory structure:
 #├── 17-others.cfg
 
 #Every site has it's own file, so you can disable site by changing
+
 #it's file extension, or appending .disabled, like I do.
 ...
 

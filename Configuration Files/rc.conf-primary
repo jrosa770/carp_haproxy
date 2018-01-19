@@ -1,0 +1,20 @@
+# 2. Configure the IP's and CARP Groups. If you're familiar with VRRP or HSRP this part will look very familiar as the basics are covered: 
+# A redundancy group with an ID as a number and a Virtual IP attached to that group.
+# /etc/rc.conf #
+# -- Primary Host -- #
+hostname="carp_host-0.example.com"	# Hostname
+ifconfig_hn0="inet 10.1.1.241 netmask 255.255.255.0 broadcast 10.1.1.255" # NIC1 IP Address - MGMT
+ifconfig_hn1="inet 10.2.2.241 netmask 255.255.255.0 broadcast 10.2.2.255" # NIC2 IP Address - LB Setup
+ifconfig_hn2="inet 10.3.3.241 netmask 255.255.255.0 broadcast 10.3.3.255" # NIC3 IP Address - 10.3.3.0/24 Access
+ifconfig_hn1_alias4="vhid 4 pass passwd4 10.2.2.4/24 up"				# CARP Group 4 with password and Group Virtual IP
+ifconfig_hn1_alias44="vhid 44 pass passwd44 10.2.2.44/24 up"			# CARP Group 44 with password and Group Virtual IP
+ifconfig_hn1_alias5="vhid 5 pass passwd4 10.2.2.5/24 up"				# CARP Group 5 with password and Group Virtual IP
+ifconfig_hn1_alias55="vhid 55 pass passwd44 10.2.2.55/24 up"			# CARP Group 55 with password and Group Virtual IP
+#
+gateway_enable="YES" # Set to YES if this host will be a gateway, in order for the system to forward packets between interfaces
+static_routes="mgmtnet usernet mysqlnet httpnet"
+route_mgmtnet="-net 10.1.0.0/23 10.1.1.254"
+route_usernet="-net 10.0.0.0/16 10.2.2.254"
+route_mysqlnet="-net 10.4.4.0/23 10.2.2.254"
+route_httpnet="-net 10.6.6.0/23 10.3.3.254"
+#

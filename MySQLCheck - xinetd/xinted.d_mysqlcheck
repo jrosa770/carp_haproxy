@@ -1,0 +1,14 @@
+# 5. Configure the Service for Port 9200 TCP
+# -- Xinetd Service for TCP 9200 -- #
+# /etc/xinetd.d/mysqlcheck
+
+service mysqlcheck
+{
+   flags        = REUSE
+   disable      = no
+   socket_type  = stream
+   protocol     = tcp
+   port         = 9200
+   wait         = no
+   user         = root
+  server        = /var/lib/mysql-check/mysqlchk.mysql.bash

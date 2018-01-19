@@ -6,21 +6,27 @@ Pre-requisites: Basic understanding of IPv4 concepts and routing and understandi
 Motivation: In a past project I needed a solution that could provide:
 1. Load balancing for MySQL (Percona with XtraDB in my case) and basic HTTP included (later moved to HTTS. 
 2, Redundancy and a method for dynamic fail over. 
-Sure I can have a vendor like F5 or A10 provide the functionality out of the box. But where is the challenge on that? Why not create it possible? What is my budget does not allow for the expense on a vendor based appliance?
+Sure I can have a vendor like F5 or A10 provide the functionality out of the box. But where is the challenge on that? 
+Why not create it possible? 
+What is my budget does not allow for the expense on a vendor based appliance?
 Open Source is there fo r a reason... Why not use it?
 
-Solution: The solution I settled for was based on FreeBSD UNIX using CARP a method for failover an redundancy similar to Cisco HSRP or the open standard VRRP. For Load Balancing the best solution I've seen is HA Proxy, a fantastic TCP based load balancer.
+Solution: The solution I settled for was based on FreeBSD UNIX using CARP a method for failover an redundancy similar to Cisco HSRP or the open standard VRRP. 
+For Load Balancing the best solution I've seen is HA Proxy, a fantastic TCP based load balancer.
 
-Method: The following example is based on that solution. The basic setup requires two FreeBSD boxes or as VM(s). If VM(s) the recommendation is for two guests in two different hosts systems. An of course a network or set of available network and last bu not least the end systems that will ultimately handle the user's request for services.
+Method: The following example is based on that solution. The basic setup requires two FreeBSD boxes or as VM(s). 
+If VM(s) the recommendation is for two guests in two different hosts systems. 
+An of course a network or set of available network and last bu not least the end systems that will ultimately handle the user's request for services.
 "
 
-Networks:
+Example Networks:
 10.1.1.0/24 - Management 
 10.2.2.0/24 - User Facing Load Balancing VIP Segment
 10.3.3.0/24 - Systems Facing Segment for load balanced Hosts
 10.4.4.0/23 - MySQL Servers Segment. Spplited in two "/24's" (10.4.4.0/24 and 10.4.5.0/24)
 10.6.6.0/24 - HTTP Server Segment
 
+# Process: 
 1. First enable IP routing and CARP on the HAProxy Systems
 # /etc/sysctl.conf - Both Systems #
 # Packet Forwarding
@@ -28,9 +34,27 @@ net.inet.ip.forwarding=1
 #
 # CARP - failover all carp interfaces as a group. The preempt option means when
 # one of the carp enabled physical interfaces goes down, advskew is changed to
-# 240 on all carp interfaces. CARP demoted to 240 stops this machine from
+# 100 on all carp interfaces. CARP demoted by 100 stops this machine from
 # accepting traffic and allows another CARP enabled machine to accept the
 # traffic.
+# This is similar in functionality to VRRP and HSRP. But one key difference
+# For example the difference from HSRP (Cisco) is that in CARP the host with the highest "advkew" is the secondary.
+# While on protocols with HSRP the host with the highst priority is the primary (See example below)
+# Cisco Example (HSRP)
+# Primary:
+# standby 4 ip 10.2.2.4
+# standby 4 priority 110
+# standby 4 preempt delay minimum 60
+# standby 4 track 1 decrement 11 < When tracking fails the priority is decremented to 99, thus allowing the secondary to take over
+#
+# Secondary:
+# standby 4 ip 10.2.2.4
+# standby 4 priority 100
+# standby 4 preempt
+#
+# VRRP works with a similar mechanism.
+
+# Enable CARP preemt in /etc/sysctl.conf - Both Systems #
 net.inet.carp.preempt=1
 
 2. Configure the IP's and CARP Groups. If you're familiar with VRRP or HSRP this part will 
@@ -42,9 +66,9 @@ hostname="carp_host-0.example.com"	# Hostname
 ifconfig_hn0="inet 10.1.1.241 netmask 255.255.255.0 broadcast 10.1.1.255" # NIC1 IP Address - MGMT
 ifconfig_hn1="inet 10.2.2.241 netmask 255.255.255.0 broadcast 10.2.2.255" # NIC2 IP Address - LB Setup
 ifconfig_hn2="inet 10.3.3.241 netmask 255.255.255.0 broadcast 10.3.3.255" # NIC3 IP Address - 10.3.3.0/24 Access
-ifconfig_hn1_alias4="vhid 4 pass passwd4 10.2.2.4/24 up"				# CARP Group 4 with password and Group Virtual IP
+ifconfig_hn1_alias4="vhid 4 pass passwd4 10.2.2.4/24 up"			# CARP Group 4 with password and Group Virtual IP
 ifconfig_hn1_alias44="vhid 44 pass passwd44 10.2.2.44/24 up"			# CARP Group 44 with password and Group Virtual IP
-ifconfig_hn1_alias5="vhid 5 pass passwd4 10.2.2.5/24 up"				# CARP Group 5 with password and Group Virtual IP
+ifconfig_hn1_alias5="vhid 5 pass passwd4 10.2.2.5/24 up"			# CARP Group 5 with password and Group Virtual IP
 ifconfig_hn1_alias55="vhid 55 pass passwd44 10.2.2.55/24 up"			# CARP Group 55 with password and Group Virtual IP
 #
 gateway_enable="YES" # Set to YES if this host will be a gateway, in order for the system to forward packets between interfaces

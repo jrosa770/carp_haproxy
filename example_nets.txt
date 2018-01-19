@@ -1,6 +1,0 @@
-Networks:
-10.1.1.0/24 - Management 
-10.2.2.0/24 - User Facing Load Balancing VIP Segment
-10.3.3.0/24 - Systems Facing Segment for load balanced Hosts
-10.4.4.0/23 - MySQL Servers Segment. Spplited in two "/24's" (10.4.4.0/24 and 10.4.5.0/24)
-10.6.6.0/24 - HTTP Server Segment
